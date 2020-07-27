@@ -2,6 +2,7 @@
 using Recruiting.BL.Repositories;
 using Recruiting.BL.Repositories.Interfaces;
 using Recruiting.BL.Services.Interfaces;
+using Recruiting.Data.EfRepositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace Recruiting.BL.Services
 {
-    public class ApplicantService : IApplicantService
+    public class ApplicantService : ServiceBase<Applicant>, IApplicantService
     {
         private readonly IApplicantRepository _applicantRepository;
 
-        public ApplicantService(IApplicantRepository applicantRepository)
+        public ApplicantService(IApplicantRepository applicantRepository, IUnitEfRepository unitRepository)
+            : base(applicantRepository, unitRepository)
         {
             _applicantRepository = applicantRepository;
         }

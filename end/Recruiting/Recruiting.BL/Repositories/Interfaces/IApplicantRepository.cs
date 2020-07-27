@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recruiting.BL.Repositories.Interfaces
 {
-    public interface IApplicantRepository
+    public interface IApplicantRepository : IRepositoryBase<Applicant>
     {
         public Task<IList<Applicant>> DomainListAsync();
         public Task<string> GetLastApplicationNameAndRef(int applicantId);
