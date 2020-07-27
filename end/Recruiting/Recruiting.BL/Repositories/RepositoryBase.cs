@@ -33,6 +33,12 @@ namespace Recruiting.BL.Repositories
             return _mapEntityToDomain(entity);
         }
 
+        public async Task<TDomain> FindByIdAsync(int id)
+        {
+            TEntity entity = await _efRepository.FindByIdAsync(id);
+            return _mapEntityToDomain(entity);
+        }
+
         public TDomain Update(TDomain updatedDomainEntity)
         {
             TEntity entity = _mapDomainToEntity(updatedDomainEntity);

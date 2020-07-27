@@ -7,6 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddEfRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IUnitEfRepository, UnitEfRepository>();
             services.AddScoped<IEfJobRepository, EfJobRepository>();
             services.AddScoped<IEfApplicantRepository, EfApplicantRepository>();
 

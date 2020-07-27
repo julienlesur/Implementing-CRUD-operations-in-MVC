@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recruiting.BL.Services.Interfaces
 {
-    public interface IJobService
+    public interface IJobService : IServiceBase<Job>
     {
         public Task<IEnumerable<Job>> GetJobs();
     }

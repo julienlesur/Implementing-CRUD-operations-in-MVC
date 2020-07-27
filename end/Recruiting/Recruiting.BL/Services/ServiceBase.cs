@@ -40,5 +40,10 @@ namespace Recruiting.BL.Services
             await _unitRepository.CommitAsync();
             return updatedEntity;
         }
+
+        public async Task<T> FindByIdAsync(int id)
+        {
+            return await _repository.FindByIdAsync(id);
+        }
     }
 }
