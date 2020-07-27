@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Recruiting.BL.Repositories
 {
-    public class ApplicantRepository : IApplicantRepository
+    public class ApplicantRepository : RepositoryBase<Applicant, EfApplicant>, IApplicantRepository
     {
         private readonly IEfApplicantRepository _efApplicantRepository;
         private readonly Func<IEnumerable<EfApplicant>, IList<Applicant>> _mapListEntityToListDomain;
 
         public ApplicantRepository(IEfApplicantRepository efApplicantRepository)
+            : base(ApplicantMapper.MapDomainToEntity, ApplicantMapper.MapEntityToDomain, efApplicantRepository)
         {
             _efApplicantRepository = efApplicantRepository;
             _mapListEntityToListDomain = ApplicantMapper.MapListEntityToListDomain;

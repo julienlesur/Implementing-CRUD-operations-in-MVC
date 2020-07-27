@@ -9,32 +9,36 @@ namespace Recruiting.BL.Mappers
 {
     public static class ApplicantMapper
     {
+        private static Applicant _EmptyApplicant = new Applicant { ApplicantId = 0 };
         public static Applicant MapEntityToDomain(EfApplicant entity)
-        => new Applicant
-        {
-            ApplicantId = entity.Id,
-            FirstName = entity.FirstName,
-            LastName = entity.LastName,
-            Email = entity.Email,
-            Adress1 = entity.Adress1,
-            Adress2 = entity.Adress2,
-            ZipCode = entity.ZipCode,
-            City = entity.City,
-            Country = entity.Country
-        };
+        => 
+            entity is null ?
+            _EmptyApplicant :
+            new Applicant
+            {
+                ApplicantId = entity.Id,
+                FirstName = entity?.FirstName,
+                LastName = entity?.LastName,
+                Email = entity?.Email,
+                Adress1 = entity?.Adress1,
+                Adress2 = entity?.Adress2,
+                ZipCode = entity?.ZipCode,
+                City = entity?.City,
+                Country = entity?.Country
+            };
 
         public static EfApplicant MapDomainToEntity(Applicant domain)
             => new EfApplicant
             {
                 Id = domain.ApplicantId,
-                FirstName = domain.FirstName,
-                LastName = domain.LastName,
-                Email = domain.Email,
-                Adress1 = domain.Adress1,
-                Adress2 = domain.Adress2,
-                ZipCode = domain.ZipCode,
-                City = domain.City,
-                Country = domain.Country
+                FirstName = domain?.FirstName,
+                LastName = domain?.LastName,
+                Email = domain?.Email,
+                Adress1 = domain?.Adress1,
+                Adress2 = domain?.Adress2,
+                ZipCode = domain?.ZipCode,
+                City = domain?.City,
+                Country = domain?.Country
             };
 
 
