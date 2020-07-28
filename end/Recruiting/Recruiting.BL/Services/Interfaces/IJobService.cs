@@ -9,5 +9,6 @@ namespace Recruiting.BL.Services.Interfaces
     public interface IJobService : IServiceBase<Job>
     {
         public Task<IEnumerable<Job>> GetJobs();
+        public bool IsReferenceUnique(int id, string reference);
     }
 }

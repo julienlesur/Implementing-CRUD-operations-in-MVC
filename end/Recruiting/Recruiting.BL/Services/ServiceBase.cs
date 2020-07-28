@@ -11,39 +11,22 @@ namespace Recruiting.BL.Services
     public abstract class ServiceBase<T> : IServiceBase<T>
     {
         private IRepositoryBase<T> _repository { get; set; }
-        private IUnitEfRepository _unitRepository { get; set; }
 
-        protected ServiceBase(IRepositoryBase<T> repository, IUnitEfRepository unitRepository)
+        protected ServiceBase(IRepositoryBase<T> repository)
         {
             _repository = repository;
-            _unitRepository = unitRepository;
         }
 
         public async Task<T> AddAsync(T newEntity)
-        {
-            newEntity = await _repository.AddAsync(newEntity);
-            await _unitRepository.CommitAsync();
-
-            return newEntity;
-        }
+            => await _repository.AddAsync(newEntity);
 
         public async Task<T> DeleteAsync(int id)
-        {
-            T deletedEntity = await _repository.DeleteAsync(id);
-            await _unitRepository.CommitAsync();
-            return deletedEntity;
-        }
+            => await _repository.DeleteAsync(id);
 
         public async Task<T> UpdateAsync(T updatedEntity)
-        {
-            updatedEntity = _repository.Update(updatedEntity);
-            await _unitRepository.CommitAsync();
-            return updatedEntity;
-        }
+            => await _repository.Update(updatedEntity);
 
         public async Task<T> FindByIdAsync(int id)
-        {
-            return await _repository.FindByIdAsync(id);
-        }
+            => await _repository.FindByIdAsync(id);
     }
 }

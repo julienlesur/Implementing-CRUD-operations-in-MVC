@@ -11,15 +11,15 @@ namespace Recruiting.BL.Services
     {
         private IJobRepository _jobRepository;
 
-        public JobService(IJobRepository jobRepository, IUnitEfRepository unitRepository)
-            : base(jobRepository, unitRepository)
+        public JobService(IJobRepository jobRepository)
+            : base(jobRepository)
         {
             _jobRepository = jobRepository;
         }
         public async Task<IEnumerable<Job>> GetJobs()
-        {
-            var jobs = await _jobRepository.DomainListAsync();
-            return jobs;
-        }
+            => await _jobRepository.DomainListAsync();
+
+        public bool IsReferenceUnique(int id, string reference)
+            => _jobRepository.IsJobReferenceUnique(id, reference);
     }
 }

@@ -24,6 +24,11 @@ namespace Recruiting.Data.EfRepositories
             return newEntity;
         }
 
+        public async Task<int> CommitAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task<T> DeleteAsync(int id)
         {
             var entity = await FindByIdAsync(id);

@@ -20,7 +20,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.FirstOrDefault().Location)
                 </th>
-                <th></th>
+                <th>
+                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Add">
+                        <i class="fas fa-plus text-white"></i>
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>

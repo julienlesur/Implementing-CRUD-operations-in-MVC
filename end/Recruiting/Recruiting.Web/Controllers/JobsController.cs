@@ -38,6 +38,24 @@ namespace Recruiting.Web.Controllers
             return View(new JobDetail { Job = job, Message = (TempData["Message"] ?? "").ToString() });
         }
 
+        public IActionResult Add(int id)
+        {
+            return View("Edit", new JobEdit { Job = new Job { JobId = 0}, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add([Bind("Title, Reference, Company, Type, Location, Description")] Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                var newJob = await _jobService.AddAsync(job);
+                TempData["Message"] = "The job has been succesfully added";
+                return RedirectToAction(nameof(Details), new { id = newJob.JobId });
+            }
+            return View("Edit", new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>() });
+        }
+
         public async Task<IActionResult> Edit(int id)
         {
             var job = await _jobService.FindByIdAsync(id);
@@ -55,9 +73,9 @@ namespace Recruiting.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                job = await _jobService.UpdateAsync(job);
+                var updatedJob = await _jobService.UpdateAsync(job);
                 TempData["Message"] = "The job has been succesfully saved";
-                return RedirectToAction(nameof(Details), new { id = job.JobId });
+                return RedirectToAction(nameof(Details), new { id = updatedJob.JobId });
             }
             return View(new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>() }); 
         }

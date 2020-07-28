@@ -33,5 +33,10 @@ namespace Recruiting.BL.Repositories
         {
             return _efJobRepository.GetNumberOfApplicationsByJobId(jobId);
         }
+
+        public bool IsJobReferenceUnique(int id, string reference)
+        {
+            return _efJobRepository.IsJobReferenceUnique(id, reference);
+        }
     }
 }

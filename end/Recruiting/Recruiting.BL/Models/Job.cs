@@ -1,4 +1,5 @@
-﻿using Recruiting.Data.EfModels;
+﻿using Recruiting.BL.Validation;
+using Recruiting.Data.EfModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,7 @@ namespace Recruiting.BL.Models
         [StringLength(255)]
         public string Description { get; set; }
         [Required, StringLength(20)]
+        [IsUniqueJobReference]
         public string Reference { get; set; }
         [Required]
         public JobType Type { get; set; }
