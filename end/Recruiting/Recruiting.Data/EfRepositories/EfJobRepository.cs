@@ -17,5 +17,10 @@ namespace Recruiting.Data.EfRepositories
                             .Where(app => app.JobId == jobId)
                             .Count();
         }
+
+        public bool IsJobReferenceUnique(int jobId, string reference)
+        {
+            return !_dbSet.Any(job => job.Id != jobId && job.Reference == reference);
+        }
     }
 }

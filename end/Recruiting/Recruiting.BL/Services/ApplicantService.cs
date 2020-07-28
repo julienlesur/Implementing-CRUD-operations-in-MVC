@@ -14,8 +14,8 @@ namespace Recruiting.BL.Services
     {
         private readonly IApplicantRepository _applicantRepository;
 
-        public ApplicantService(IApplicantRepository applicantRepository, IUnitEfRepository unitRepository)
-            : base(applicantRepository, unitRepository)
+        public ApplicantService(IApplicantRepository applicantRepository)
+            : base(applicantRepository)
         {
             _applicantRepository = applicantRepository;
         }

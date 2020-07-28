@@ -10,5 +10,6 @@ namespace Recruiting.BL.Repositories.Interfaces
     {
         public Task<IList<Job>> DomainListAsync();
         public int GetApplicationsCountByJobId(int jobId);
+        public bool IsJobReferenceUnique(int id, string reference);
     }
 }

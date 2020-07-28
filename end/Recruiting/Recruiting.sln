@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recruiting.Data", "Recruiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recruiting.BL", "Recruiting.BL\Recruiting.BL.csproj", "{F5F38B3F-60CC-4B5F-894F-7055F84F2D60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recruiting.Infrastructures", "Recruiting.Infrastructures\Recruiting.Infrastructures.csproj", "{85A88F8D-AC9B-47EF-AD01-A61515A4F72A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recruiting.Infrastructures", "Recruiting.Infrastructures\Recruiting.Infrastructures.csproj", "{85A88F8D-AC9B-47EF-AD01-A61515A4F72A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
