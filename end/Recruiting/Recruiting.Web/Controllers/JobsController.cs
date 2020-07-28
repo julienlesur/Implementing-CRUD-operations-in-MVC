@@ -79,5 +79,16 @@ namespace Recruiting.Web.Controllers
             }
             return View(new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>() }); 
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedJob = await _jobService.DeleteAsync(id);
+            if (deletedJob == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }

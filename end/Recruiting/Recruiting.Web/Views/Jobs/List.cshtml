@@ -30,7 +30,7 @@
         <tbody>
             @foreach (var job in Model)
             {
-            <tr>
+            <tr id="job@(job.JobId)">
                 <td>
                     @Html.DisplayFor(modelItem => job.Title)
                 </td>
@@ -50,9 +50,19 @@
                     <a class="btn btn-sm" asp-controller="Jobs" asp-action="Edit" asp-route-id="@job.JobId">
                         <i class="fas fa-pen"></i>
                     </a>
+                    <form class="delete-job" asp-action="Delete" asp-controller="Jobs" method="delete">
+                        <input type="hidden" asp-for="@job.JobId" />
+                        <button type="submit" class="btn btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section Scripts{ 
+    <script src="~/js/joblist.js"></script>
+}
