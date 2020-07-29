@@ -9,7 +9,7 @@ namespace Recruiting.Web.Models.ViewModels
 {
     public class JobEdit
     {
-        public Job Job { get; set; }
-        public IEnumerable<SelectListItem> Types { get; set; }
+        public Job Job { get; internal set; }
+        public IEnumerable<SelectListItem> Types { get; internal set; }
     }
 }
