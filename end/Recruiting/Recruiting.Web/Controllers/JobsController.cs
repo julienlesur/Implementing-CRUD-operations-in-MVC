@@ -35,10 +35,10 @@ namespace Recruiting.Web.Controllers
             {
                 return NotFound();
             }
-            return View(new JobDetail { Job = job, Message = (TempData["Message"] ?? "").ToString() });
+            return View(new JobDetails { Job = job, Message = (TempData["Message"] ?? "").ToString() });
         }
 
-        public IActionResult Add(int id)
+        public IActionResult Add()
         {
             return View("Edit", new JobEdit { Job = new Job { JobId = 0}, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
         }
@@ -81,6 +81,7 @@ namespace Recruiting.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             var deletedJob = await _jobService.DeleteAsync(id);

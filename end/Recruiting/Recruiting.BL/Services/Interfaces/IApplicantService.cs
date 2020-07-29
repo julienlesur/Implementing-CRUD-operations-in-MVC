@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recruiting.BL.Services.Interfaces
 {
-    public interface IApplicantService
+    public interface IApplicantService : IServiceBase<Applicant>
     {
         public Task<IEnumerable<Applicant>> GetApplicantsWithLastApplication();
     }
