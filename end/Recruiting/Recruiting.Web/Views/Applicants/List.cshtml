@@ -25,8 +25,8 @@
                 <th>
                     Last Application
                 </th>
-                <th>
-                    <a class="btn btn-sm" asp-controller="Applicants" asp-action="Add">
+                <th class="d-flex justify-content-center">
+                    <a class="btn btn-sm" asp-controller="Applicants" asp-action="Add" title="Add applicant">
                         <i class="fas fa-plus text-white"></i>
                     </a>
                 </th>
@@ -51,16 +51,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => applicant.DisplayApplicationTitle)
                     </td>
-                    <td>
-                        <a class="btn btn-sm" asp-controller="Applicants" asp-action="Details" asp-route-id="@applicant.ApplicantId">
+                    <td class="d-flex justify-content-center">
+                        <a class="btn btn-sm" asp-controller="Applicants" asp-action="Details" asp-route-id="@applicant.ApplicantId" title="Details applicant">
                             <i class="fas fa-info-circle"></i>
                         </a>
-                        <a class="btn btn-sm" asp-controller="Applicants" asp-action="Edit" asp-route-id="@applicant.ApplicantId">
+                        <a class="btn btn-sm" asp-controller="Applicants" asp-action="Edit" asp-route-id="@applicant.ApplicantId" title="Edit applicant">
                             <i class="fas fa-pen"></i>
                         </a>
                         <form class="delete-job" asp-action="Delete" asp-controller="Applicants" asp-route-id="@applicant.ApplicantId" method="post" onclick="return confirm('Do you really want to delete this applicant?')">
                             <input type="hidden" asp-for="@applicant.ApplicantId" />
-                            <button type="submit" class="btn btn-sm">
+                            <button type="submit" class="btn btn-sm" title="Delete applicant">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

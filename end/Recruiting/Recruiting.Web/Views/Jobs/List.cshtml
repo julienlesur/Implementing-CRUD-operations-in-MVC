@@ -20,8 +20,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.FirstOrDefault().Location)
                 </th>
-                <th>
-                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Add">
+                <th class="d-flex justify-content-center">
+                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Add" title="Add job">
                         <i class="fas fa-plus text-white"></i>
                     </a>
                 </th>
@@ -43,16 +43,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => job.Location)
                 </td>
-                <td>
-                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Details" asp-route-id="@job.JobId">
+                <td class="d-flex justify-content-center">
+                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Details" asp-route-id="@job.JobId" title="Details Job">
                         <i class="fas fa-info-circle"></i>
                     </a>
-                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Edit" asp-route-id="@job.JobId">
+                    <a class="btn btn-sm" asp-controller="Jobs" asp-action="Edit" asp-route-id="@job.JobId" title="Edit job">
                         <i class="fas fa-pen"></i>
                     </a>
                     <form class="delete-job" asp-action="Delete" asp-controller="Jobs"  asp-route-id="@job.JobId" method="post" onclick="return confirm('Do you really want to delete this job?')">
-                        <input type="hidden" asp-for="@job.JobId" />
-                        <button type="submit" class="btn btn-sm">
+                        <input type="hidden" asp-for="@job.JobId"/>
+                        <button type="submit" class="btn btn-sm" title="Delete job">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
