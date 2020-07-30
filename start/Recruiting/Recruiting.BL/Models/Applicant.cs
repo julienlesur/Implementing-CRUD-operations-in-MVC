@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Recruiting.BL.Models
 {
@@ -21,5 +19,8 @@ namespace Recruiting.BL.Models
         public string DisplayApplicationTitle { get; set; }
 
         public IList<Application> Applications { get; set; }
+
+
+        public static readonly Applicant _EmptyApplicant = new Applicant { ApplicantId = 0 };
     }
 }

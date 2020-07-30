@@ -1,29 +1,45 @@
-﻿using Recruiting.BL.Models;
-using Recruiting.BL.Repositories;
-using Recruiting.BL.Repositories.Interfaces;
+﻿using Recruiting.BL.Mappers;
+using Recruiting.BL.Models;
 using Recruiting.BL.Services.Interfaces;
+using Recruiting.Data.EfModels;
+using Recruiting.Data.EfRepositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Recruiting.BL.Services
 {
     public class ApplicantService : IApplicantService
     {
-        private readonly IApplicantRepository _applicantRepository;
+        private readonly IEfApplicantRepository _efApplicantRepository;
+        private readonly Func<IEnumerable<EfApplicant>, IList<Applicant>> _mapListEntityToListDomain;
+        private readonly Func<EfApplication, Application> _mapApplicationEntityToDomain;
 
-        public ApplicantService(IApplicantRepository applicantRepository)
+        public ApplicantService(IEfApplicantRepository efApplicantRepository)
         {
-            _applicantRepository = applicantRepository;
+            _efApplicantRepository = efApplicantRepository;
+            _mapListEntityToListDomain = ApplicantMapper.MapListEntityToListDomain;
+            _mapApplicationEntityToDomain = ApplicationMapper.MapEntityToDomain;
         }
-        public async Task<IEnumerable<Applicant>> GetApplicantsWithLastApplication()
+
+        public async Task<IList<Applicant>> DomainListAsync()
         {
-            var applicants = await _applicantRepository.DomainListAsync();
+            IEnumerable<EfApplicant> efApplicants = await _efApplicantRepository.ListAsync();
+            return _mapListEntityToListDomain(efApplicants);
+        }
+        public async Task<Application> GetApplicantLastApplication(int applicantId)
+        {
+            var efLastApplication = await _efApplicantRepository.GetLastApplicationByApplicantId(applicantId);
+            return _mapApplicationEntityToDomain(efLastApplication);
+        }
+
+        public async Task<IEnumerable<Applicant>> GetApplicantListWithLastApplication()
+        {
+            var applicants = await DomainListAsync();
             foreach (var applicant in applicants)
             {
-                var applicationNAmeAndRef = await _applicantRepository.GetLastApplicationNameAndRef(applicant.ApplicantId);
-                applicant.DisplayApplicationTitle = applicationNAmeAndRef;
+                var lastApplication = await GetApplicantLastApplication(applicant.ApplicantId);
+                applicant.DisplayApplicationTitle = lastApplication.JobTitleAndRef;
             }
             return applicants;
         }

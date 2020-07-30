@@ -9,15 +9,16 @@ namespace Recruiting.BL.Mappers
     public static class ApplicationMapper
     {
         public static Application MapEntityToDomain(EfApplication entity)
-         => new Application
-         {
-             ApplicantId = entity.ApplicantId,
-             ApplicantFullName = ApplicantMapper.MapEntityToDomain(entity.Applicant).FulllName,
-             JobReference = entity.Job.Reference,
-             JobTitle = entity.Job.Title,
-             ApplicationDate = entity.ApplicationDate
-         };
-
-
+         =>
+            entity == null ?
+            Application._EmptyApplication :
+            new Application
+            {
+                ApplicantId = entity.ApplicantId,
+                ApplicantFullName = ApplicantMapper.MapEntityToDomain(entity.Applicant).FulllName,
+                JobReference = entity.Job.Reference,
+                JobTitle = entity.Job.Title,
+                ApplicationDate = entity.ApplicationDate
+            };
     }
 }

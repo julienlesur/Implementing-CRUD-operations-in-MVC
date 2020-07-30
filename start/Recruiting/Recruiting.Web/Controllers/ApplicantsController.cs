@@ -18,7 +18,7 @@ namespace Recruiting.Web.Controllers
         }
         public async Task<IActionResult> List()
         {
-            IEnumerable<Applicant> applicants = await _applicantService.GetApplicantsWithLastApplication();
+            IEnumerable<Applicant> applicants = await _applicantService.GetApplicantListWithLastApplication();
             
             return View(applicants);
         }

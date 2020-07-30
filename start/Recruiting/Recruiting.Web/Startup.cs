@@ -4,13 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Recruiting.BL.Repositories;
-using Recruiting.BL.Repositories.Interfaces;
-using Recruiting.BL.Services;
-using Recruiting.BL.Services.Interfaces;
 using Recruiting.Data.Data;
-using Recruiting.Data.EfRepositories;
-using Recruiting.Data.EfRepositories.Interfaces;
 
 namespace Recruiting.Web
 {
@@ -33,7 +27,6 @@ namespace Recruiting.Web
                 options.UseSqlServer(Configuration.GetConnectionString("RecruitingContext")));
 
             services
-                .AddRepositories()
                 .AddEfRepositories()
                 .AddServices();
         }

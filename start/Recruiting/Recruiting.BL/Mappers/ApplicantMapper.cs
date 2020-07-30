@@ -1,27 +1,27 @@
 ﻿using Recruiting.BL.Models;
-using Recruiting.BL.Repositories.Interfaces;
 using Recruiting.Data.EfModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Recruiting.BL.Mappers
 {
     public static class ApplicantMapper
     {
         public static Applicant MapEntityToDomain(EfApplicant entity)
-        => new Applicant
-        {
-            ApplicantId = entity.Id,
-            FirstName = entity.FirstName,
-            LastName = entity.LastName,
-            Email = entity.Email,
-            Adress1 = entity.Adress1,
-            Adress2 = entity.Adress2,
-            ZipCode = entity.ZipCode,
-            City = entity.City,
-            Country = entity.Country
-        };
+        =>
+            entity is null ?
+            Applicant._EmptyApplicant :
+            new Applicant
+            {
+                ApplicantId = entity.Id,
+                FirstName = entity?.FirstName,
+                LastName = entity?.LastName,
+                Email = entity?.Email,
+                Adress1 = entity?.Adress1,
+                Adress2 = entity?.Adress2,
+                ZipCode = entity?.ZipCode,
+                City = entity?.City,
+                Country = entity?.Country
+            };
 
         public static EfApplicant MapDomainToEntity(Applicant domain)
             => new EfApplicant

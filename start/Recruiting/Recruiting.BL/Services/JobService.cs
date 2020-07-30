@@ -1,25 +1,28 @@
-﻿using Recruiting.BL.Models;
-using Recruiting.BL.Repositories.Interfaces;
+﻿using Recruiting.BL.Mappers;
+using Recruiting.BL.Models;
 using Recruiting.BL.Services.Interfaces;
+using Recruiting.Data.EfModels;
+using Recruiting.Data.EfRepositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Recruiting.BL.Services
 {
     public class JobService : IJobService
     {
-        private IJobRepository _jobRepository;
+        private readonly IEfJobRepository _efJobRepository;
+        private readonly Func<IEnumerable<EfJob>, IList<Job>> _mapListEntityToListDomain;
 
-        public JobService(IJobRepository jobRepository)
+        public JobService(IEfJobRepository efJobRepository)
         {
-            _jobRepository = jobRepository;
+            _efJobRepository = efJobRepository;
+            _mapListEntityToListDomain = JobMapper.MapListEntityToListDomain;
         }
         public async Task<IEnumerable<Job>> GetJobs()
         {
-            var jobs = await _jobRepository.DomainListAsync();
-            return jobs;
+            IEnumerable<EfJob> efJobs = await _efJobRepository.ListAsync();
+            return _mapListEntityToListDomain(efJobs);
         }
     }
 }
