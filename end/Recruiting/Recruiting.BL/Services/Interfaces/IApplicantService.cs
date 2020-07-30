@@ -8,6 +8,7 @@ namespace Recruiting.BL.Services.Interfaces
 {
     public interface IApplicantService : IServiceBase<Applicant>
     {
-        public Task<IEnumerable<Applicant>> GetApplicantsWithLastApplication();
+        Task<Application> GetApplicantLastApplication(int applicantId);
+        Task<IEnumerable<Applicant>> GetApplicantListWithLastApplication();
     }
 }

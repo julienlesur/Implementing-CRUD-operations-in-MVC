@@ -10,6 +10,5 @@ namespace Recruiting.Data.EfRepositories.Interfaces
         Task<T> AddAsync(T newEntity);
         T Update(T updatedEntity);
         Task<T> DeleteAsync(int id);
-        Task<int> CommitAsync();
     }
 }

@@ -19,7 +19,7 @@ namespace Recruiting.Web.Controllers
         }
         public async Task<IActionResult> List()
         {
-            IEnumerable<Applicant> applicants = await _applicantService.GetApplicantsWithLastApplication();
+            IEnumerable<Applicant> applicants = await _applicantService.GetApplicantListWithLastApplication();
             
             return View(applicants);
         }
@@ -27,9 +27,9 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Details(int id)
         {
             Applicant applicant = await _applicantService.FindByIdAsync(id);
-            if (applicant.ApplicantId == 0)
+            if (Applicant.IsEmpty(applicant))
             {
-                return NotFound();
+                return RedirectToAction(nameof(ApplicantNotFound));
             }
             return View(new ApplicantDetails { Applicant = applicant, Message = (TempData["Message"] ?? "").ToString() });
         }
@@ -56,9 +56,9 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var applicant = await _applicantService.FindByIdAsync(id);
-            if (applicant.ApplicantId == 0)
+            if (Applicant.IsEmpty(applicant))
             {
-                return NotFound();
+                return RedirectToAction(nameof(ApplicantNotFound));
             }
 
             return View(applicant);
@@ -82,11 +82,16 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deletedApplicant = await _applicantService.DeleteAsync(id);
-            if (deletedApplicant == null)
+            if (Applicant.IsEmpty(deletedApplicant))
             {
-                return NotFound();
+                return RedirectToAction(nameof(ApplicantNotFound));
             }
             return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult ApplicantNotFound()
+        {
+            return View();
         }
     }
 }

@@ -31,9 +31,9 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Details(int id)
         {
             Job job = await _jobService.FindByIdAsync(id);
-            if (job.JobId == 0)
+            if (Job.IsEmpty(job))
             {
-                return NotFound();
+                return RedirectToAction(nameof(JobNotFound));
             }
             return View(new JobDetails { Job = job, Message = (TempData["Message"] ?? "").ToString() });
         }
@@ -59,9 +59,9 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var job = await _jobService.FindByIdAsync(id);
-            if (job.JobId == 0)
+            if (Job.IsEmpty(job))
             {
-                return NotFound();
+                return RedirectToAction(nameof(JobNotFound));
             }
 
             return View(new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
@@ -85,11 +85,16 @@ namespace Recruiting.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deletedJob = await _jobService.DeleteAsync(id);
-            if (deletedJob == null)
+            if (Job.IsEmpty(deletedJob))
             {
-                return NotFound();
+                return RedirectToAction(nameof(JobNotFound));
             }
             return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult JobNotFound()
+        {
+            return View();
         }
     }
 }

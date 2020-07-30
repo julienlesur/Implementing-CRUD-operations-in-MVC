@@ -25,5 +25,10 @@ namespace Recruiting.BL.Models
 
         public int NumberOfApplications { get; set; }
         public IList<Application> Applications { get; set; }
+
+
+        public static readonly Job _EmptyJob = new Job { JobId = 0 };
+        public static bool IsEmpty(Job job)
+            => job.JobId == 0;
     }
 }

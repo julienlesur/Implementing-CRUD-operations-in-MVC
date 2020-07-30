@@ -1,20 +1,15 @@
 ﻿using Recruiting.BL.Models;
-using Recruiting.BL.Repositories;
-using Recruiting.BL.Repositories.Interfaces;
 using Recruiting.Data.EfModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Recruiting.BL.Mappers
 {
     public static class JobMapper
     {
-        private static Job _EmptyJob = new Job { JobId = 0 };
         public static Job MapEntityToDomain(EfJob entity)
         => 
             entity is null ?
-            _EmptyJob :
+            Job._EmptyJob :
             new Job
             {
                 JobId = entity.Id,

@@ -1,19 +1,15 @@
 ﻿using Recruiting.BL.Models;
-using Recruiting.BL.Repositories.Interfaces;
 using Recruiting.Data.EfModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Recruiting.BL.Mappers
 {
     public static class ApplicantMapper
     {
-        private static Applicant _EmptyApplicant = new Applicant { ApplicantId = 0 };
         public static Applicant MapEntityToDomain(EfApplicant entity)
         => 
             entity is null ?
-            _EmptyApplicant :
+            Applicant._EmptyApplicant :
             new Applicant
             {
                 ApplicantId = entity.Id,
