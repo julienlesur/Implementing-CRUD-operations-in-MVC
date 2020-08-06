@@ -3,7 +3,14 @@
 @{
 }
 
-<h2>Editing @Model.Job.Title - @Model.Job.Reference </h2>
+@if (Model.Job.JobId > 0)
+{
+    <h2>Editing @Model.Job.Title - @Model.Job.Reference </h2>
+}
+else
+{
+    <h2>Adding a new Job </h2>
+}
 
 
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Recruiting.BL.Models
 {
-    public class Applicant
+    public class Applicant : IEquatable<Applicant>
     {
         public int ApplicantId { get; set; }
         [Required]
@@ -40,6 +40,52 @@ namespace Recruiting.BL.Models
 
         public static readonly Applicant _EmptyApplicant = new Applicant { ApplicantId = 0 };
         public static bool IsEmpty(Applicant applicant)
-            => applicant.ApplicantId == 0;
+            => applicant == _EmptyApplicant;
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Applicant);
+        }
+
+        public bool Equals(Applicant other)
+        {
+            return other != null &&
+                   ApplicantId == other.ApplicantId &&
+                   FirstName == other.FirstName &&
+                   LastName == other.LastName &&
+                   FulllName == other.FulllName &&
+                   Email == other.Email &&
+                   Adress1 == other.Adress1 &&
+                   Adress2 == other.Adress2 &&
+                   ZipCode == other.ZipCode &&
+                   City == other.City &&
+                   Country == other.Country;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(ApplicantId);
+            hash.Add(FirstName);
+            hash.Add(LastName);
+            hash.Add(FulllName);
+            hash.Add(Email);
+            hash.Add(Adress1);
+            hash.Add(Adress2);
+            hash.Add(ZipCode);
+            hash.Add(City);
+            hash.Add(Country);
+            return hash.ToHashCode();
+        }
+
+        public static bool operator ==(Applicant left, Applicant right)
+        {
+            return EqualityComparer<Applicant>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Applicant left, Applicant right)
+        {
+            return !(left == right);
+        }
     }
 }

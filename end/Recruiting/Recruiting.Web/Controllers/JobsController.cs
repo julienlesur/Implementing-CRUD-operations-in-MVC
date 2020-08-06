@@ -40,7 +40,7 @@ namespace Recruiting.Web.Controllers
 
         public IActionResult Add()
         {
-            return View("Edit", new JobEdit { Job = new Job { JobId = 0}, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
+            return View("Edit", new JobEdit { Job = Job._EmptyJob, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace Recruiting.Web.Controllers
                 TempData["Message"] = "The job has been succesfully added";
                 return RedirectToAction(nameof(Details), new { id = newJob.JobId });
             }
-            return View("Edit", new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>() });
+            return View("Edit", new JobEdit { Job = job, Types = _htmlHelper.GetEnumSelectList<JobType>().OrderBy(t => t.Text) });
         }
 
         public async Task<IActionResult> Edit(int id)

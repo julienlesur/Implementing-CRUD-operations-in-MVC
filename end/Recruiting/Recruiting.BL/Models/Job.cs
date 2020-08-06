@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Recruiting.BL.Models
 {
-    public class Job
+    public class Job : IEquatable<Job>
     {
         public int JobId { get; set; }
         [Required]
@@ -28,7 +28,39 @@ namespace Recruiting.BL.Models
 
 
         public static readonly Job _EmptyJob = new Job { JobId = 0 };
-        public static bool IsEmpty(Job job)
-            => job.JobId == 0;
+            public static bool IsEmpty(Job job)
+                => job == _EmptyJob;
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Job);
+        }
+
+        public bool Equals(Job other)
+        {
+            return other != null &&
+                   JobId == other.JobId &&
+                   Title == other.Title &&
+                   Description == other.Description &&
+                   Reference == other.Reference &&
+                   Type == other.Type &&
+                   Location == other.Location &&
+                   Company == other.Company;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(JobId, Title, Description, Reference, Type, Location, Company);
+        }
+
+        public static bool operator ==(Job left, Job right)
+        {
+            return EqualityComparer<Job>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Job left, Job right)
+        {
+            return !(left == right);
+        }
     }
 }

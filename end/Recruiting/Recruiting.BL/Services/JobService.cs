@@ -28,6 +28,6 @@ namespace Recruiting.BL.Services
         }
 
         public bool IsReferenceUnique(int id, string reference)
-            => _efJobRepository.IsJobReferenceUnique(id, reference);
+            => _efJobRepository.IsReferenceUnique(id, reference);
     }
 }

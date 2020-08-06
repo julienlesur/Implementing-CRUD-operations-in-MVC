@@ -37,7 +37,7 @@ namespace Recruiting.Web.Controllers
 
         public IActionResult Add()
         {
-            return View("Edit", new Applicant{ ApplicantId = 0 });
+            return View("Edit", Applicant._EmptyApplicant);
         }
 
         [HttpPost]
